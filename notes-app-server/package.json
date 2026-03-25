@@ -1,0 +1,27 @@
+{
+  "name": "notes-app-server",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "./src/index.ts",
+  "scripts": {
+    "start": "npx nodemon"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.22.0",
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.5.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "nodemon": "^3.1.14",
+    "prisma": "^5.22.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19"
+  }
+}
