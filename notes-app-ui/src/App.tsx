@@ -24,8 +24,7 @@ const App = () => {
   useEffect(() => {
     const fetchNotes = async () => {
       try { //logic to call the API
-        const response =
-          await fetch("http://localhost:5000/api/notes")  //batch function to call API, default is GET request
+       const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/notes`)  //batch function to call API, default is GET request
 
         //Take response and convert to json
         const notes: Note[] = await response.json() //Endpoints will give us array of Note depending on action we do
@@ -56,7 +55,7 @@ const App = () => {
     //API call to add note to database
     try { 
       const response = await fetch(
-        "http://localhost:5000/api/notes", //Since we are now making an API request, add the name async to the function 
+         `${import.meta.env.VITE_API_BASE_URL}/api/notes`, //Since we are now making an API request, add the name async to the function 
         {
           method: "POST", //add HTTP method for creating note
           headers: {
@@ -92,7 +91,7 @@ const App = () => {
       try {
       //Logic to call the API to update the note in the database
        const response = await fetch(
-        `http://localhost:5000/api/notes/${selectedNote.id}`, //pass in the ID of the selected note in the URL to know which note to update
+         `${import.meta.env.VITE_API_BASE_URL}/api/notes/${selectedNote.id}`, //pass in the ID of the selected note in the URL to know which note to update
         {  //using template string to dynamically pass in the ID of the selected note ${selectedNote.id}
           method: "PUT", //HTTP method for updating note
           headers: {
@@ -138,7 +137,7 @@ const App = () => {
 
     try {
       await fetch(
-        `http://localhost:5000/api/notes/${noteId}`, //pass in the ID of the selected note in the URL to know which note to delete
+         `${import.meta.env.VITE_API_BASE_URL}/api/notes/${noteId}`, //pass in the ID of the selected note in the URL to know which note to delete
         {
           method: "DELETE" //HTTP method for deleting note
         }
