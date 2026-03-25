@@ -1,6 +1,5 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "framework": "vite",
-  "rootDirectory": "notes-app-ui"
+  "outputDirectory": "notes-app-ui/dist",
+  "framework": "vite"
 }
