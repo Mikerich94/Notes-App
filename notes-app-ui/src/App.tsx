@@ -24,7 +24,7 @@ const App = () => {
   useEffect(() => {
     const fetchNotes = async () => {
       try { //logic to call the API
-       const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/notes`)  //batch function to call API, default is GET request
+       const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/notes`)  //batch function to call API, default is GET request
 
         //Take response and convert to json
         const notes: Note[] = await response.json() //Endpoints will give us array of Note depending on action we do
@@ -47,6 +47,7 @@ const App = () => {
     setTitle(note.title); //set the title content to whatever values come from selected note
     setContent(note.content); //set the updated content 
   }
+
   //Function to handle the submit of the form
   const handleAddNote = async (
     event: React.FormEvent
@@ -55,7 +56,7 @@ const App = () => {
     //API call to add note to database
     try { 
       const response = await fetch(
-         `${import.meta.env.VITE_API_BASE_URL}/api/notes`, //Since we are now making an API request, add the name async to the function 
+        `${process.env.REACT_APP_API_BASE_URL}/api/notes`, //Since we are now making an API request, add the name async to the function 
         {
           method: "POST", //add HTTP method for creating note
           headers: {
@@ -67,7 +68,6 @@ const App = () => {
       );
       const newNote: Note = await response.json(); //Get the newly created note from the API response
 
-
       //moved the state function calls inside bc we need after API has completed the request
       setNotes([newNote, ...notes]); //Updates state. First item in new array is the newly created note, then it adds the rest of the existing notes with spread operator
       setTitle(""); //Resets the title after submission to be blank for better UX 
@@ -75,7 +75,6 @@ const App = () => {
     } catch (e) {
       console.log(e); //log any errors
     }
-
   };
 
   //Take whatever user changes in the clicked note and save it
@@ -83,7 +82,7 @@ const App = () => {
     ) => {
       event.preventDefault();
 
-      // if we don’t have a selected note, then just return out of the function.
+      // if we don't have a selected note, then just return out of the function.
       if (!selectedNote) {
         return;
       }
@@ -91,7 +90,7 @@ const App = () => {
       try {
       //Logic to call the API to update the note in the database
        const response = await fetch(
-         `${import.meta.env.VITE_API_BASE_URL}/api/notes/${selectedNote.id}`, //pass in the ID of the selected note in the URL to know which note to update
+        `${process.env.REACT_APP_API_BASE_URL}/api/notes/${selectedNote.id}`, //pass in the ID of the selected note in the URL to know which note to update
         {  //using template string to dynamically pass in the ID of the selected note ${selectedNote.id}
           method: "PUT", //HTTP method for updating note
           headers: {
@@ -103,8 +102,8 @@ const App = () => {
 
        const updatedNote: Note = await response.json(); //Get the updated note from the API response
 
-    //pasted  existing code that updates the UI and paste within the try block 
-    //Use notes.map function to create a new array+ update that array with our new note object
+      //pasted existing code that updates the UI and paste within the try block 
+      //Use notes.map function to create a new array+ update that array with our new note object
       const updatedNotesList = notes.map((note) => //.map() function iterates over the array of notes
         note.id === selectedNote.id //check to see if the ID of the note the map function is on equals the id of the selected note
           ? updatedNote //if the IDs match, return the updatedNote into the array
@@ -112,15 +111,13 @@ const App = () => {
       )
 
       setNotes(updatedNotesList) //updates our state
-      setTitle("") //Resets title varibale to be a blank string
+      setTitle("") //Resets title variable to be a blank string
       setContent("") //same with content
       setSelectedNote(null) //reset the selectedNote after we update the array
 
       } catch (error) {
         console.log(error); //log any errors
       }
-
-      
     };
 
   const handleCancel = () => {
@@ -137,25 +134,22 @@ const App = () => {
 
     try {
       await fetch(
-         `${import.meta.env.VITE_API_BASE_URL}/api/notes/${noteId}`, //pass in the ID of the selected note in the URL to know which note to delete
+        `${process.env.REACT_APP_API_BASE_URL}/api/notes/${noteId}`, //pass in the ID of the selected note in the URL to know which note to delete
         {
           method: "DELETE" //HTTP method for deleting note
         }
       );
 
-      
-    const updatedNotes = notes.filter( //returns all the notes the user didn't click delete on
-      (note) => note.id !== noteId
-    )
+      const updatedNotes = notes.filter( //returns all the notes the user didn't click delete on
+        (note) => note.id !== noteId
+      )
 
-    setNotes(updatedNotes); //save the new array without the deleted note to state 
+      setNotes(updatedNotes); //save the new array without the deleted note to state 
 
     } catch (error) {
       console.log(error); //log any errors
     } 
-    
   };
-
 
   return (
     <div className="app-container">
@@ -193,7 +187,6 @@ const App = () => {
           <button type="submit">Add Note</button>
         )}
       </form>
-
 
       <div className="notes-grid">
         {notes.map((note) => (
