@@ -26,14 +26,25 @@ body {
 }
 
 .note-item {
-  display:flex;
+  display: flex;
   flex-direction: column;
-  border: 1px solid #ccc;
-  padding: 10px;
-  border-radius:5px;
-  background-color: #f9f9f9;
-  box-shadow: 0px 0px 10px rbga(0,0,0,0.1);
+  border-radius: 12px;
+  padding: 16px;
+  background-color: #ffffff;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   cursor: pointer;
+  transition: 
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.note-item:hover {
+  transform: translateY(-6px); /* lift up */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18); /* deeper shadow */
+}
+.note-item:active {
+  transform: translateY(-2px) scale(0.98);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
 }
 
 .notes-header {
