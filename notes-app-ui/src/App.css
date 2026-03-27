@@ -108,3 +108,12 @@ textarea, input {
 .edit-buttons button:last-of-type:hover {
   background-color: rgb(235, 110, 110);
 }
+
+.sidenote {
+  margin-top: 30px;
+  padding: 10px;
+  background-color: #fff4e5;
+  border-left: 4px solid #ffa500;
+  font-size: 14px;
+  color: #333;
+}

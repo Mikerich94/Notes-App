@@ -152,6 +152,7 @@ const App = () => {
   };
 
   return (
+    <div>
     <div className="app-container">
       <form
         className="note-form"
@@ -205,6 +206,11 @@ const App = () => {
         ))}
       </div>
     </div>
+   <div className='sidenote'>
+      <p>Note- the cards may take a minute to load in due to free tier subscription.</p>
+    </div>
+  </div>
+  
   )
 };
 
