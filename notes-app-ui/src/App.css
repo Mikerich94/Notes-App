@@ -117,3 +117,7 @@ textarea, input {
   font-size: 14px;
   color: #333;
 }
+
+.sidenote p {
+  margin:0;
+}
