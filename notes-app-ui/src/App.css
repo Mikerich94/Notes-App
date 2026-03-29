@@ -3,6 +3,9 @@ body {
   background-color:lightgrey;
 }
 
+h1 {
+  margin:0!important;
+}
 .app-container {
   grid-template-columns: 1fr;
 }
