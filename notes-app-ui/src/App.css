@@ -10,7 +10,7 @@ body {
 @media (min-width:600px) {
   .app-container {
     display:grid;
-    grid-template-columns:200px 1fr;
+    grid-template-columns:300px 1fr;
     gap:20px;
   }
 }
@@ -120,4 +120,11 @@ textarea, input {
 
 .sidenote p {
   margin:0;
+}
+
+@media (max-width:767px) {
+  .app-container {
+    display:grid;
+    gap:30px;
+  }
 }
