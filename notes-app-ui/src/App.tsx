@@ -155,39 +155,41 @@ const App = () => {
     <div>
     <div className="app-container">
       <form
-        className="note-form"
-        onSubmit={(event) =>
-          selectedNote
-            ? handleUpdateNote(event)  //When form is submitted and selectedNote exists 
-            : handleAddNote(event) //Else, add a new note
-        } >
-        <input
-          value={title}
-          onChange={(event) =>
-            setTitle(event.target.value)
-          }
-          placeholder="title"
-          required></input>
-        <textarea
-          value={content}
-          onChange={(event) =>
-            setContent(event.target.value)
-          }
-          placeholder="Content"
-          rows={10}
-          required></textarea>
+  className="note-form"
+  onSubmit={(event) =>
+    selectedNote
+      ? handleUpdateNote(event)
+      : handleAddNote(event)
+  }
+>
+  {/* Dynamic Title */}
+  <h1>{selectedNote ? "Edit Note" : "Add New Note"}</h1>
 
-        {selectedNote ? (
-          <div className="edit-buttons">
-            <button type="submit">Save</button>
-            <button onClick={handleCancel}>
-              Cancel
-            </button>
-          </div>
-        ) : (
-          <button type="submit">Add Note</button>
-        )}
-      </form>
+  <input
+    value={title}
+    onChange={(event) => setTitle(event.target.value)}
+    placeholder="Title"
+    required
+  />
+  <textarea
+    value={content}
+    onChange={(event) => setContent(event.target.value)}
+    placeholder="Content"
+    rows={10}
+    required
+  />
+
+  {selectedNote ? (
+    <div className="edit-buttons">
+      <button type="submit">Save</button>
+      <button type="button" onClick={handleCancel}>
+        Cancel
+      </button>
+    </div>
+  ) : (
+    <button type="submit">Add Note</button>
+  )}
+</form>
 
       <div className="notes-grid">
         {notes.map((note) => (
