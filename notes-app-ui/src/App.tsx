@@ -10,8 +10,8 @@ type Note = {
 
 const App = () => {
   const [notes, setNotes] = useState
-    <Note[]>  //Typescript : Generic Type
-    ([]) //Empty notes state array 
+    <Note[]> 
+    ([])
 
   // Adding state values for both form inputs
   const [title, setTitle] = useState("");
@@ -19,6 +19,7 @@ const App = () => {
 
   //Store clicked note as selectedNote, default is null because start with no note selected
   const [selectedNote, setSelectedNote] = useState<Note | null>(null);
+  const [loading, setLoading] = useState(true);
 
   //Async function that calls the API
   useEffect(() => {
@@ -34,11 +35,17 @@ const App = () => {
 
       } catch (e) { //prevents app from breaking if API request has error 
         console.log(e); //log any errors 
-      }
+      } finally {
+      setLoading(false); // hides warning message whether fetch succeeds or fails
+    }
     };
 
     //call fetchNotes function 
     fetchNotes();
+
+    // Fallback: hide warning after 60 seconds no matter what
+  const timer = setTimeout(() => setLoading(false), 60000);
+  return () => clearTimeout(timer); // cleanup on unmount
   }, []); //add dependency array with comma and empty array. Only runs the first time the app renders
 
   // Function to handle event when user clicks the note
@@ -208,9 +215,11 @@ const App = () => {
         ))}
       </div>
     </div>
-   <div className='sidenote'>
-      <p>Note- the cards may take a minute to load in due to free tier subscription.</p>
-    </div>
+  {loading && (
+  <div className='sidenote'>
+    <p>Note - the cards may take a minute to load due to the free tier subscription.</p>
+  </div>
+)}
   </div>
   
   )
